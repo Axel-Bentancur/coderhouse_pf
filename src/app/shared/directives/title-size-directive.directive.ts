@@ -10,6 +10,8 @@ export class TitleSizeDirectiveDirective {
   }
 
   applyStyles(): void {
-    this.el.nativeElement.style.fontSize = "20px"
+    //this.el.nativeElement.style.fontSize = "20px"
+    this.el.nativeElement.style.textAlign = "center"
+    this.el.nativeElement.style.marginTop = "2rem"
   }
 }

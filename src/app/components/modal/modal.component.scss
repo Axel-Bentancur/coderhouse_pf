@@ -1,0 +1,22 @@
+.modal-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 40px;
+  text-align: center;
+
+  p {
+    font-size: 25px;
+
+    span {
+      color: #1976d2;
+    }
+  }
+
+  .modal-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

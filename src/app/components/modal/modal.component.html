@@ -1,27 +1,29 @@
-<h2 mat-dialog-title>
-  <!-- CONDITIONAL -->
-  <ng-container *ngIf="data.type === 'Create new'; else otherType">
-    Create New User
-  </ng-container>
-  <ng-template #otherType>
-    <ng-container *ngIf="data.type === 'Edit'; else deleteTemplate">
-      Edit User
+<div class="modal-container">
+  <h3 mat-dialog-title>
+    <!-- CONDITIONAL -->
+    <ng-container *ngIf="data.type === 'Create new'; else otherType">
+      Create New User
     </ng-container>
-    <ng-template #deleteTemplate>
-      Are you sure you want to delete student <span style="margin: 10px 0; color: #1976d2;">{{ student?.firstName }}</span>?
+    <ng-template #otherType>
+      <ng-container *ngIf="data.type === 'Edit'; else deleteTemplate">
+        Edit User
+      </ng-container>
+      <ng-template #deleteTemplate>
+        <p>Are you sure you want to delete student <span>{{ student?.firstName }}</span> ?</p>
+      </ng-template>
     </ng-template>
-  </ng-template>
-</h2>
+  </h3>
 
-<!-- FORM FOR EDIT OR CREATE -->
-<ng-container *ngIf="data.type !== 'Delete'">
-  <app-form-edit [student]="data.student"></app-form-edit>
-</ng-container>
+  <!-- FORM FOR EDIT OR CREATE -->
+  <ng-container *ngIf="data.type !== 'Delete'">
+    <app-form-edit [student]="data.student"></app-form-edit>
+  </ng-container>
 
-<!-- OPTIONS BUTTON -->
-<ng-container *ngIf="data.type === 'Delete'">
-  <div mat-dialog-actions>
-    <button mat-raised-button (click)="onCancel()">No, Cancel</button>
-    <button mat-raised-button (click)="onDelete()">Yes, Confirm</button>
-  </div>
-</ng-container>
+  <!-- OPTIONS BUTTON -->
+  <ng-container *ngIf="data.type === 'Delete'">
+    <div mat-dialog-actions class="modal-btn">
+      <button mat-raised-button (click)="onCancel()">No, Cancel</button>
+      <button mat-raised-button (click)="onDelete()">Yes, Confirm</button>
+    </div>
+  </ng-container>
+</div>
