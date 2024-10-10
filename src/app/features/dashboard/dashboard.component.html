@@ -1,0 +1,59 @@
+<mat-drawer-container class="dashboard__container" [hasBackdrop]="true">
+
+  <!-- LATERAL MENU -->
+  <mat-drawer #drawer [mode]='"over"'>
+    <div class="lateral-menu">
+      <button mat-fab extended class="menu-icon" aria-label="Students list">
+        <mat-icon>people_alt</mat-icon>
+        Students List
+      </button>
+      <button mat-fab extended class="menu-icon" aria-label="Courses list">
+        <mat-icon>folder</mat-icon>
+        Courses List
+      </button>
+      <button mat-fab extended class="menu-icon" aria-label="Add new student">
+        <mat-icon>person_add</mat-icon>
+        Add Student
+      </button>
+      <button mat-fab extended class="menu-icon" aria-label="Add new course">
+        <mat-icon>create_new_folder</mat-icon>
+        Add Course
+      </button>
+      <button mat-fab extended class="menu-icon" aria-label="Assign student to course">
+        <mat-icon>assignment_ind</mat-icon>
+        Assign Student to Course
+      </button>
+
+    </div>
+  </mat-drawer>
+
+  <!-- RIGHT CONTENT -->
+  <mat-drawer-content class="right-container">
+
+    <!-- TOOLBAR -->
+    <mat-toolbar>
+      <div class="toolbar__container">
+        <button mat-fab extended (click)="drawer.toggle()" class="menu-icon" aria-label="Toggle menu">
+          <mat-icon>menu</mat-icon>
+          Menu
+        </button>
+        <h2>EduManage</h2>
+        <div class="toolbar__options">
+          <button mat-fab class="menu-icon" aria-label="Manage account">
+            <mat-icon>person</mat-icon>
+          </button>
+          <button mat-fab class="menu-icon" aria-label="Logout">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </div>
+
+      </div>
+    </mat-toolbar>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <app-users-table/>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
+

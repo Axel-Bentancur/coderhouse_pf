@@ -1,0 +1,64 @@
+<form class="form-container" [formGroup]="formEdit" (ngSubmit)="onSubmit()">
+
+  <!-- FIRSTNAME INPUT-->
+  <mat-form-field class="form-input">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="firstNameControl?.invalid">
+      {{ firstNameControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- LASTNAME INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="lastNameControl?.errors?.['error_msg']">
+      {{ lastNameControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- PHONE NUMBER INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Phone Number</mat-label>
+    <input matInput formControlName="phone">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="phoneControl?.invalid">
+      {{ phoneControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- ADDRESS INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="addressControl?.invalid">
+      {{ addressControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- EMAIL INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="mail@example.com">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="emailControl?.invalid">
+      {{ emailControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- SUBMIT BUTTON -->
+  <div mat-dialog-actions>
+    <button mat-raised-button >No, Cancel</button>
+    <button mat-raised-button type="submit">Yes, Confirm</button>
+  </div>
+</form>
+
