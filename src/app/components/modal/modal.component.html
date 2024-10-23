@@ -1,26 +1,47 @@
 <div class="modal-container">
   <h3 mat-dialog-title>
     <!-- CONDITIONAL -->
-    <ng-container *ngIf="data.type === 'Create new'; else otherType">
-      Create New User
+    <ng-container *ngIf="data.action === 'Create'; else addTemplate">
+      Create New {{ data.entity === 'Student' ? 'Student' : 'Course' }}
     </ng-container>
-    <ng-template #otherType>
-      <ng-container *ngIf="data.type === 'Edit'; else deleteTemplate">
-        Edit User
+
+    <ng-template #addTemplate>
+      <ng-container *ngIf="data.action === 'Add'; else editTemplate">
+        Add New {{ data.entity === 'Student' ? 'Student' : 'Course' }}
       </ng-container>
-      <ng-template #deleteTemplate>
-        <p>Are you sure you want to delete student <span>{{ student?.firstName }}</span> ?</p>
+      <ng-template #editTemplate>
+        <ng-container *ngIf="data.action === 'Edit'; else deleteTemplate">
+          Edit {{ data.entity === 'Student' ? 'Student' : 'Course' }}
+        </ng-container>
+        <ng-template #deleteTemplate>
+          <p>
+            Are you sure you want to delete {{ data.entity === 'Student' ? 'Student' : 'Course' }}
+            <span>{{ displayName }}</span>?
+          </p>
+        </ng-template>
       </ng-template>
     </ng-template>
   </h3>
 
-  <!-- FORM FOR EDIT OR CREATE -->
-  <ng-container *ngIf="data.type !== 'Delete'">
-    <app-form-edit [student]="data.student"></app-form-edit>
+  <!-- FORM FOR ADD, EDIT OR CREATE -->
+  <ng-container *ngIf="data.action !== 'Delete'">
+    <ng-container *ngIf="data.entity === 'Student'; else courseForm">
+      <app-form-edit-student [student]="student"></app-form-edit-student>
+    </ng-container>
+    <ng-template #courseForm>
+      <ng-container *ngIf="data.entity === 'Course'">
+        <ng-container *ngIf="data.action === 'Add'; else editCourse">
+          <app-form-add-course [course]="course"></app-form-add-course>
+        </ng-container>
+        <ng-template #editCourse>
+          <app-form-edit-course [course]="course"></app-form-edit-course>
+        </ng-template>
+      </ng-container>
+    </ng-template>
   </ng-container>
 
   <!-- OPTIONS BUTTON -->
-  <ng-container *ngIf="data.type === 'Delete'">
+  <ng-container *ngIf="data.action === 'Delete'">
     <div mat-dialog-actions class="modal-btn">
       <button mat-raised-button (click)="onCancel()">No, Cancel</button>
       <button mat-raised-button (click)="onDelete()">Yes, Confirm</button>

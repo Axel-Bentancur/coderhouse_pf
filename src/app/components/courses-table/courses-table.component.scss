@@ -1,0 +1,16 @@
+.course-table {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+
+  .add-icon{
+    margin-bottom: 20px;
+    align-self: flex-end;
+  }
+
+  .loading{
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,28 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 
+// COMPONENTS
 import { DashboardComponent } from './dashboard.component';
-import { UsersTableModule } from '../../components/users-table/users-table.module';
+
+// MODULES
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { ToolbarModule } from '../../components/toolbar/toolbar.module';
+import { SidenavModule } from '../../components/sidenav/sidenav.module';
+import { StudentTableModule } from '../../components/students-table/student-table.module';
+import { CoursesTableModule } from '../../components/courses-table/courses-table.module';
+import { StudentProfileModule } from '../../components/student-profile/student-profile.module';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ClassAssignmentModule } from '../../components/class-assignment/class-assignment.module';
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    UsersTableModule,
-    MatSidenavModule,
+
+    ToolbarModule,
+    SidenavModule,
+    StudentTableModule,
+    CoursesTableModule,
+    StudentProfileModule,
+    ClassAssignmentModule,
+
     MatIconModule,
-    MatToolbarModule,
     MatButtonModule,
-  ],
-  exports: [ DashboardComponent ]
+    MatSidenavModule,
+  ]
 })
 export class DashboardModule { }

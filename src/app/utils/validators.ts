@@ -1,7 +1,10 @@
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 
+// VARIABLES
 const MIN_LENGTH_STRING = 3;
+const LENGTH_PHONE = 10;
 
+// STUDENTS VALIDATORS
 export const firstNameValidator: (fieldName: string) => ValidatorFn = (fieldName: string) => {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const minLength = MIN_LENGTH_STRING;
@@ -45,9 +48,6 @@ export const lastNameValidator: (fieldName: string) => ValidatorFn = (fieldName:
     return null;
   };
 };
-
-
-const LENGTH_PHONE = 10;
 
 export const phoneNumberValidator: ValidatorFn = (control) => {
   const value = control.value || '';
@@ -108,3 +108,65 @@ export const emailValidator: ValidatorFn = (control) => {
   return null;
 };
 
+// COURSES VALIDATORS
+
+export const courseNameValidator: (fieldName: string) => ValidatorFn = (fieldName: string) => {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const minLength = MIN_LENGTH_STRING;
+    const value = control.value || '';
+
+    if (!value) {
+      return { error_msg: "This field is required." };
+    }
+
+    if (value.length < minLength) {
+      return { error_msg: `Minimum length is ${minLength} characters.` };
+    }
+
+    const isValid = /^[A-Za-z0-9\s]+$/.test(value);
+    if (!isValid) {
+      return { error_msg: `Please enter a valid ${fieldName}.` };
+    }
+
+    return null;
+  };
+};
+
+export const numberValidator: (fieldName: string) => ValidatorFn = (fieldName: string) => {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+
+    if (value === null || value === '') {
+      return { error_msg: "This field is required." };
+    }
+
+    const isValid = /^[0-9]+$/.test(value.toString());
+    if (!isValid) {
+      return { error_msg: `Please enter a valid ${fieldName} (only numbers are allowed).` };
+    }
+
+    return null;
+  };
+};
+
+export const teacherNameValidator: (fieldName: string) => ValidatorFn = (fieldName: string) => {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value || '';
+
+    if (!value) {
+      return { error_msg: "This field is required." };
+    }
+
+    const nameParts = value.trim().split(' ');
+    if (nameParts.length < 2) {
+      return { error_msg: `Please enter both first and last name for the ${fieldName}.` };
+    }
+
+    const isValid = /^[A-Za-z\s]+$/.test(value);
+    if (!isValid) {
+      return { error_msg: `Please enter a valid ${fieldName} (only letters and spaces are allowed).` };
+    }
+
+    return null;
+  };
+};

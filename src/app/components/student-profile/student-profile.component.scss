@@ -1,0 +1,48 @@
+.student-profile {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+
+  .loading{
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile {
+    display: flex;
+    padding: 3rem;
+    align-items: center;
+    justify-content: space-around;
+
+    &__photo {
+      border-radius: 50%;
+    }
+
+    &__info {
+      &__title {
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+
+      &__subtitle {
+        p {
+          color: #151515;
+          span {
+            font-weight: bold;
+            color: #000a6e;
+          }
+        }
+      }
+
+      mat-card-content {
+        margin-top: 30px;
+      }
+
+    }
+  }
+}
+
+.bg-color {
+  background-color: #d2d1f580;
+}

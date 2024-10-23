@@ -1,0 +1,45 @@
+<form class="form-container" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+  <h2>Welcome Back</h2>
+  <p>Enter your credentials for login</p>
+
+  <!-- EMAIL INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="mail@example.com">
+
+    <!-- ERROR MSG
+    <mat-error *ngIf="emailControl?.invalid">
+      {{ emailControl?.errors?.['error_msg'] }}
+    </mat-error>-->
+  </mat-form-field>
+
+    <!-- PASSWORD INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Contraseña</mat-label>
+    <input matInput formControlName="password" placeholder="Contraseña" type="password">
+
+    <!-- ERROR MSG
+    <mat-error *ngIf="passwordControl?.invalid">
+      {{ passwordControl?.errors?.['error_msg'] }}
+    </mat-error>-->
+  </mat-form-field>
+
+  <!-- REMEMBER ME AND FORGOT PASSWORD -->
+  <div class="checkbox-container">
+    <mat-checkbox formControlName="rememberMe">Remember Me</mat-checkbox>
+    <span class="forgot-password"> <a href="#">Forgot Password?</a> </span>
+  </div>
+
+  <!-- SUBMIT BUTTON -->
+  <div mat-dialog-actions class="modal-btn">
+    <button mat-raised-button type="submit">Log In</button>
+  </div>
+
+  <!-- SIGN UP PROMPT -->
+  <div class="signup-prompt">
+    <span>New User? <a routerLink="/auth/register">Sign Up</a></span>
+  </div>
+</form>
+
+

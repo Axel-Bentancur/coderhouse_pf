@@ -1,0 +1,17 @@
+<mat-toolbar class="toolbar">
+  <div class="toolbar__container">
+    <button mat-fab extended (click)="onToggleSidenav()" class="menu-icon" aria-label="Toggle menu">
+      <mat-icon>menu</mat-icon>
+      Menu
+    </button>
+    <h2>EduManage</h2>
+    <div class="toolbar__options">
+      <button mat-fab class="menu-icon" aria-label="Manage account">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-fab class="menu-icon" aria-label="Logout" [routerLink]="['/login']">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

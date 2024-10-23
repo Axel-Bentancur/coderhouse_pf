@@ -1,0 +1,53 @@
+<form class="form-container" [formGroup]="formEdit" (ngSubmit)="onSubmit()">
+
+  <!-- COURSENAME INPUT-->
+  <mat-form-field class="form-input">
+    <mat-label>Course Name</mat-label>
+    <input matInput formControlName="courseName">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="courseNameControl?.invalid">
+      {{ courseNameControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- CLASSES QTY INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Number of Classes</mat-label>
+    <input matInput formControlName="courseClassQty">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="courseClassQtyControl?.errors?.['error_msg']">
+      {{ courseClassQtyControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- HOURS QTY INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Hours Quantity</mat-label>
+    <input matInput formControlName="hoursQty">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="hoursQtyControl?.invalid">
+      {{ hoursQtyControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- TEACHER INPUT -->
+  <mat-form-field class="form-input">
+    <mat-label>Teacher</mat-label>
+    <input matInput formControlName="teacherName">
+
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="teacherNameControl?.invalid">
+      {{ teacherNameControl?.errors?.['error_msg'] }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- SUBMIT BUTTON -->
+  <div mat-dialog-actions class="modal-btn">
+    <button mat-raised-button >No, Cancel</button>
+    <button mat-raised-button type="submit" [disabled]="formEdit.invalid">Yes, Confirm</button>
+  </div>
+</form>
+

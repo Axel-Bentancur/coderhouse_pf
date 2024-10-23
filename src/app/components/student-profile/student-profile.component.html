@@ -1,0 +1,36 @@
+<div class="student-profile">
+  <h3 appTitleSizeDirective>Student Profile</h3>
+  @if(isLoading) {
+    <!-- LOADER -->
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+
+    <!-- PROFILE CARD -->
+    <mat-card class="bg-color">
+      <div class="profile">
+        <div class="profile__photo">
+          <img mat-card-xl-image src="{{ student?.photo }}" alt="avatar">
+        </div>
+        <div class="profile__info">
+          <mat-card-header>
+            <mat-card-title class="profile__info__title">{{ student | userFullName }}</mat-card-title>
+            <mat-card-subtitle class="profile__info__subtitle">
+              <p><span>Adress:</span> {{ student?.address }}</p>
+              <p><span>Phone number:</span> {{ student?.phone }}</p>
+              <p><span>Email:</span> {{ student?.email }}</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <h6>Enrolled Courses:</h6>
+            <ul *ngFor="let course of student?.courses">
+              <li>{{ course.courseName }}</li>
+            </ul>
+          </mat-card-content>
+        </div>
+      </div>
+    </mat-card>
+  }
+</div>
