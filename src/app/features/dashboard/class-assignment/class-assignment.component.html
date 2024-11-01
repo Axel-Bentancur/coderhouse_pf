@@ -1,0 +1,48 @@
+<div class="assingment-component">
+  <h3 appTitleSizeDirective>Assign Student to Course</h3>
+
+  <div *ngIf="isLoading">
+    <!-- LOADER -->
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <mat-accordion class="dropdown">
+      <ng-container *ngFor="let course of courses">
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" class="dropdown__container">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ course.courseName }}</mat-panel-title>
+            <mat-panel-description class="dropdown__container__title">
+              Teacher: {{ course.teacherName }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="dropdown__container__content">
+            <div>
+              <ng-container *ngIf="course.studentList && course.studentList.length > 0; else noStudents">
+                <ng-container *ngFor="let student of course.studentList;">
+                  <mat-chip-row
+                    (removed)="removeStudent(course.id, student.id)"
+                    class="dropdown__container__content__chip"
+                  >
+                    {{ student.firstName }}
+                    <button matChipRemove [attr.aria-label]="'Remove ' + student.firstName">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </ng-container>
+              </ng-container>
+              <ng-template #noStudents>
+                <p class="course__msg">No students in this course.</p>
+              </ng-template>
+            </div>
+            <button mat-icon-button aria-label="delete" (click)="openDialog('Add', 'Course', course)">
+              <mat-icon class="delete-icon">person_add</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </ng-container>
+</div>

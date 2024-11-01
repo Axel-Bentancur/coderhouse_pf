@@ -8,10 +8,10 @@
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" placeholder="mail@example.com">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="emailControl?.invalid">
       {{ emailControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
     <!-- PASSWORD INPUT -->
@@ -19,10 +19,10 @@
     <mat-label>Contraseña</mat-label>
     <input matInput formControlName="password" placeholder="Contraseña" type="password">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="passwordControl?.invalid">
       {{ passwordControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
   <!-- REMEMBER ME AND FORGOT PASSWORD -->

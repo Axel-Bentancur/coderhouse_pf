@@ -2,27 +2,43 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // COMPONENTS
-import { StudentTableComponent } from '../../components/students-table/student-table.component';
-import { CoursesTableComponent } from '../../components/courses-table/courses-table.component';
-import { StudentProfileComponent } from '../../components/student-profile/student-profile.component';
-import { ClassAssignmentComponent } from '../../components/class-assignment/class-assignment.component';
+import { StudentTableComponent } from './students-table/student-table.component';
+import { CoursesTableComponent } from './courses-table/courses-table.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { ClassAssignmentComponent } from './class-assignment/class-assignment.component';
 
 const routes: Routes = [
   {
     path: 'students',
     component: StudentTableComponent,
+    loadChildren: () =>
+      import('./students-table/student-table.module').then(
+        (m) => m.StudentTableModule
+      ),
   },
   {
     path: 'students/:id',
     component: StudentProfileComponent,
+    loadChildren: () =>
+      import('./student-profile/student-profile.module').then(
+        (m) => m.StudentProfileModule
+      ),
   },
   {
     path: 'courses',
     component: CoursesTableComponent,
+    loadChildren: () =>
+      import('./courses-table/courses-table.module').then(
+        (m) => m.CoursesTableModule
+      ),
   },
   {
     path: 'assignments',
     component: ClassAssignmentComponent,
+    loadChildren: () =>
+      import('./class-assignment/class-assignment.module').then(
+        (m) => m.ClassAssignmentModule
+      ),
   },
   {
     path: '**',

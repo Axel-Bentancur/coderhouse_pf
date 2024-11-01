@@ -7,14 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 // MODULES
+import { SharedModule } from '../../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
-
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -26,13 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
   imports: [
     CommonModule,
     AuthRoutingModule,
-
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatRadioModule
+    SharedModule
   ]
 })
 export class AuthModule { }

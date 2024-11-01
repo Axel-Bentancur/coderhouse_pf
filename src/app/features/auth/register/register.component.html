@@ -8,10 +8,10 @@
     <mat-label>First Name</mat-label>
     <input matInput formControlName="firstName">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="firstNameControl?.invalid">
       {{ firstNameControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
   <!-- LASTNAME INPUT -->
@@ -19,10 +19,10 @@
     <mat-label>Last Name</mat-label>
     <input matInput formControlName="lastName">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="lastNameControl?.errors?.['error_msg']">
       {{ lastNameControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
   <!-- PHONE NUMBER INPUT -->
@@ -30,10 +30,10 @@
     <mat-label>Phone Number</mat-label>
     <input matInput formControlName="phone">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="phoneControl?.invalid">
       {{ phoneControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
   <!-- ADDRESS INPUT -->
@@ -41,10 +41,10 @@
     <mat-label>Address</mat-label>
     <input matInput formControlName="address">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="addressControl?.invalid">
       {{ addressControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
   <!-- EMAIL INPUT -->
@@ -52,23 +52,23 @@
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" placeholder="mail@example.com">
 
-    <!-- ERROR MSG
+    <!-- ERROR MSG -->
     <mat-error *ngIf="emailControl?.invalid">
       {{ emailControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    </mat-error>
   </mat-form-field>
 
-  <!-- EMAIL INPUT -->
+  <!-- SEX RADIO BUTTON -->
   <div>
     <mat-radio-group formControlName="sex">
       <mat-radio-button value="Male">Male</mat-radio-button>
       <mat-radio-button value="Female">Female</mat-radio-button>
     </mat-radio-group>
 
-    <!-- ERROR MSG
-    <mat-error *ngIf="emailControl?.invalid">
-      {{ emailControl?.errors?.['error_msg'] }}
-    </mat-error>-->
+    <!-- ERROR MSG -->
+    <mat-error *ngIf="sexControl?.invalid">
+      {{ sexControl?.errors?.['error_msg'] }}
+    </mat-error>
   </div>
 
   <!-- SUBMIT BUTTON -->

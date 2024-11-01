@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { firstNameValidator, lastNameValidator, phoneNumberValidator, emailValidator, addressValidator } from '../../../utils/validators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { firstNameValidator, lastNameValidator, phoneNumberValidator, emailValidator, addressValidator, sexValidator } from '../../../core/utils/validators';
 
 @Component({
   selector: 'app-register',
@@ -19,14 +19,38 @@ export class RegisterComponent {
       phone:["", phoneNumberValidator],
       address: ["", addressValidator],
       email:["", emailValidator],
-      sex: ["", ]
+      sex: ["", sexValidator]
     })
+  }
+
+  get firstNameControl(){
+    return this.formRegister.get('firstName')
+  }
+
+  get lastNameControl(){
+    return this.formRegister.get('lastName')
+  }
+
+  get phoneControl(){
+    return this.formRegister.get('phone')
+  }
+
+  get addressControl(){
+    return this.formRegister.get('address')
+  }
+
+  get emailControl(){
+    return this.formRegister.get('email')
+  }
+
+  get sexControl(){
+    return this.formRegister.get('sex')
   }
 
   onSubmit(): void {
     if (this.formRegister.valid) {
       // Lógica para manejar el envío del formulario
-      console.log('Formulario enviado:', this.formRegister.value);
+      console.log('Form submitted:', this.formRegister.value);
     }
   }
 }
