@@ -27,6 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatChipsModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatMenuModule,
+
 
     TitleSizeDirectiveDirective,
     UserFullNamePipe,

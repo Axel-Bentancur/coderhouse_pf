@@ -16,6 +16,7 @@ export class ToolbarComponent {
     private authService: AuthService,
   ){
     this.authUser$ = this.authService.authUser$;
+    console.log(this.authUser$)
   }
 
   onToggleSidenav() {
