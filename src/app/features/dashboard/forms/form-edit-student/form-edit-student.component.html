@@ -1,64 +1,71 @@
-<form class="form-container" [formGroup]="formEdit" (ngSubmit)="onSubmit()">
+<div>
+  <h3 mat-dialog-title>
+    <ng-container>
+      {{action}} Student
+    </ng-container>
+  </h3>
+  <form class="form-container" [formGroup]="formEdit" (ngSubmit)="onSubmit()">
 
-  <!-- FIRSTNAME INPUT-->
-  <mat-form-field class="form-input">
-    <mat-label>First Name</mat-label>
-    <input matInput formControlName="firstName">
+    <!-- FIRSTNAME INPUT-->
+    <mat-form-field class="form-input">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
 
-    <!-- ERROR MSG -->
-    <mat-error *ngIf="firstNameControl?.invalid">
-      {{ firstNameControl?.errors?.['error_msg'] }}
-    </mat-error>
-  </mat-form-field>
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="firstNameControl?.invalid">
+        {{ firstNameControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
 
-  <!-- LASTNAME INPUT -->
-  <mat-form-field class="form-input">
-    <mat-label>Last Name</mat-label>
-    <input matInput formControlName="lastName">
+    <!-- LASTNAME INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
 
-    <!-- ERROR MSG -->
-    <mat-error *ngIf="lastNameControl?.errors?.['error_msg']">
-      {{ lastNameControl?.errors?.['error_msg'] }}
-    </mat-error>
-  </mat-form-field>
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="lastNameControl?.errors?.['error_msg']">
+        {{ lastNameControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
 
-  <!-- PHONE NUMBER INPUT -->
-  <mat-form-field class="form-input">
-    <mat-label>Phone Number</mat-label>
-    <input matInput formControlName="phone">
+    <!-- PHONE NUMBER INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phone">
 
-    <!-- ERROR MSG -->
-    <mat-error *ngIf="phoneControl?.invalid">
-      {{ phoneControl?.errors?.['error_msg'] }}
-    </mat-error>
-  </mat-form-field>
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="phoneControl?.invalid">
+        {{ phoneControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
 
-  <!-- ADDRESS INPUT -->
-  <mat-form-field class="form-input">
-    <mat-label>Address</mat-label>
-    <input matInput formControlName="address">
+    <!-- ADDRESS INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address">
 
-    <!-- ERROR MSG -->
-    <mat-error *ngIf="addressControl?.invalid">
-      {{ addressControl?.errors?.['error_msg'] }}
-    </mat-error>
-  </mat-form-field>
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="addressControl?.invalid">
+        {{ addressControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
 
-  <!-- EMAIL INPUT -->
-  <mat-form-field class="form-input">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" placeholder="mail@example.com">
+    <!-- EMAIL INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="mail@example.com">
 
-    <!-- ERROR MSG -->
-    <mat-error *ngIf="emailControl?.invalid">
-      {{ emailControl?.errors?.['error_msg'] }}
-    </mat-error>
-  </mat-form-field>
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="emailControl?.invalid">
+        {{ emailControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
 
-  <!-- SUBMIT BUTTON -->
-  <div mat-dialog-actions class="modal-btn">
-    <button mat-raised-button >No, Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="formEdit.invalid">Yes, Confirm</button>
-  </div>
-</form>
+    <!-- SUBMIT BUTTON -->
+    <div mat-dialog-actions class="modal-btn">
+      <button mat-raised-button (click)="onCancel()">No, Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="formEdit.invalid">Yes, Confirm</button>
+    </div>
+  </form>
+</div>
 

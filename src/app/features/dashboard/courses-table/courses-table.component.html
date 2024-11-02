@@ -2,7 +2,7 @@
   <h3 appTitleSizeDirective>Course List</h3>
 
   <!-- ADD COURSE -->
-  <button mat-fab extended class="add-icon" aria-label="Course list" (click)="openDialog('Create', 'Course', null)">
+  <button mat-fab extended class="add-icon" aria-label="Course list" (click)="openDialog('Course', 'Create', null)">
     <mat-icon>create_new_folder</mat-icon>
     Add New Course
   </button>
@@ -49,7 +49,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="edit" (click)="openDialog('Edit', 'Course', element)">
+          <button mat-icon-button aria-label="edit" (click)="openDialog('Course', 'Edit', element)">
             <mat-icon class="edit-icon">edit</mat-icon>
           </button>
         </td>
@@ -59,7 +59,7 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Delete </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="delete" (click)="openDialog('Delete', 'Course', element)">
+          <button mat-icon-button aria-label="delete" (click)="openDialog('Course', 'Delete', element)">
             <mat-icon class="delete-icon">delete</mat-icon>
           </button>
         </td>

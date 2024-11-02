@@ -14,6 +14,8 @@ export class FormAddCourseComponent {
   isLoading = false;
   @Input() studentList : IStudent[] = [];
   @Input() course: ICourse | null = null;
+  @Input() action: string = '';
+  @Input() modalType: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +41,10 @@ export class FormAddCourseComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  onCancel(): void {
+    this.matdialogRef.close();
   }
 
   onSubmit(): void {

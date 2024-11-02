@@ -5,23 +5,27 @@
       <mat-spinner></mat-spinner>
     </div>
   } @else {
-    <form [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+      <h3 mat-dialog-title>
+        <ng-container>
+          {{action}} a New Student to the Course
+        </ng-container>
+      </h3>
+      <form class="form-container" [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+        <!-- SELECT INPUT -->
+        <mat-form-field appearance="fill">
+          <mat-label>Select Student</mat-label>
+          <mat-select formControlName="selectedStudent">
+            <mat-option *ngFor="let student of studentList" [value]="student.id">
+              {{ student.firstName }} {{ student.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <!-- SELECT INPUT -->
-      <mat-form-field appearance="fill">
-        <mat-label>Select Student</mat-label>
-        <mat-select formControlName="selectedStudent">
-          <mat-option *ngFor="let student of studentList" [value]="student.id">
-            {{ student.firstName }} {{ student.lastName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- SUBMIT BUTTON -->
-      <div mat-dialog-actions class="modal-btn">
-        <button mat-raised-button >No, Cancel</button>
-        <button mat-raised-button type="submit">Yes, Confirm</button>
-      </div>
-    </form>
+        <!-- SUBMIT BUTTON -->
+        <div mat-dialog-actions class="modal-btn">
+          <button mat-raised-button (click)="onCancel()">No, Cancel</button>
+          <button mat-raised-button type="submit">Yes, Confirm</button>
+        </div>
+      </form>
   }
 </div>

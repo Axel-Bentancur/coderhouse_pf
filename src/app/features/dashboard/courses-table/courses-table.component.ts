@@ -70,12 +70,12 @@ export class CoursesTableComponent implements OnInit{
     })
   }
 
-  openDialog(action: 'Create' | 'Edit' | 'Delete', entity: string, element: ICourse | null): void {
+  openDialog(modalType: string, action: string, element: ICourse | null): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: {
+        modalType: modalType,
         action: action,
-        entity: entity,
         element: element,
       }
     });

@@ -18,7 +18,7 @@ export const firstNameValidator: (fieldName: string) => ValidatorFn = (fieldName
         return { error_msg: `Minimum length is ${minLength} characters.` };
       }
 
-      const isValid = /^[A-Za-z\s]*$/.test(value);
+      const isValid = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/.test(value);
       if (!isValid) {
         return { error_msg: `Please enter a valid ${fieldName}.` };
       }
@@ -40,7 +40,7 @@ export const lastNameValidator: (fieldName: string) => ValidatorFn = (fieldName:
         return { error_msg: `Minimum length is ${minLength} characters.` };
       }
 
-      const isValid = /^[A-Za-z\s]*$/.test(value);
+      const isValid = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/.test(value);
       if (!isValid) {
         return { error_msg: `Please enter a valid ${fieldName}.` };
       }
@@ -79,7 +79,7 @@ export const addressValidator: ValidatorFn = (control) => {
     return { error_msg: "This field is required." };
   }
 
-  const isValid = /^[a-zA-Z0-9\s.,-]*$/.test(value);
+  const isValid = /^[a-zA-Z0-9\s.,-ÁÉÍÓÚáéíóúÑñ]*$/.test(value);
   if (!isValid) {
     return {
       error_msg: "Please enter a valid address."
@@ -153,7 +153,8 @@ export const courseNameValidator: (fieldName: string) => ValidatorFn = (fieldNam
       return { error_msg: `Minimum length is ${minLength} characters.` };
     }
 
-    const isValid = /^[A-Za-z0-9\s]+$/.test(value);
+    const isValid = /^[a-zA-Z0-9\s.,-ÁÉÍÓÚáéíóúÑñ]*$/.test(value);
+
     if (!isValid) {
       return { error_msg: `Please enter a valid ${fieldName}.` };
     }
@@ -192,7 +193,8 @@ export const teacherNameValidator: (fieldName: string) => ValidatorFn = (fieldNa
       return { error_msg: `Please enter both first and last name for the ${fieldName}.` };
     }
 
-    const isValid = /^[A-Za-z\s]+$/.test(value);
+    const isValid = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/.test(value);
+
     if (!isValid) {
       return { error_msg: `Please enter a valid ${fieldName} (only letters and spaces are allowed).` };
     }

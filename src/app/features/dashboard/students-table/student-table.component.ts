@@ -70,12 +70,12 @@ export class StudentTableComponent implements OnInit{
     });
   }
 
-  openDialog(action: 'Create' | 'Edit' | 'Delete', entity: string, element: IStudent | null): void {
+  openDialog(modalType: string, action: string, element: IStudent | null): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: {
+        modalType: modalType,
         action: action,
-        entity: entity,
         element: element,
       }
     });

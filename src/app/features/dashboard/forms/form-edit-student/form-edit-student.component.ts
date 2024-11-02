@@ -11,7 +11,10 @@ import { IStudent } from '../../../../core/models';
 })
 export class FormEditStudentComponent {
   formEdit: FormGroup
+
   @Input() student: IStudent | null = null;
+  @Input() action: string = '';
+  @Input() modalType: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,6 +59,10 @@ export class FormEditStudentComponent {
 
   get emailControl(){
     return this.formEdit.get('email')
+  }
+
+  onCancel(): void {
+    this.matdialogRef.close();
   }
 
   onSubmit(): void {

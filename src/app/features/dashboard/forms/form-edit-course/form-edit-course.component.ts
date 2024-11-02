@@ -12,6 +12,9 @@ import { ICourse } from '../../../../core/models';
 export class FormEditCourseComponent {
   formEdit: FormGroup
   @Input() course: ICourse | null = null;
+  @Input() action: string = '';
+  @Input() modalType: string = '';
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,6 +53,10 @@ export class FormEditCourseComponent {
 
   get teacherNameControl(){
     return this.formEdit.get('teacherName')
+  }
+
+  onCancel(): void {
+    this.matdialogRef.close();
   }
 
   onSubmit(): void {
