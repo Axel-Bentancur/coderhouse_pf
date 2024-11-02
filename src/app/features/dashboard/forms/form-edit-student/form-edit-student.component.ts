@@ -66,10 +66,11 @@ export class FormEditStudentComponent {
   }
 
   onSubmit(): void {
-    const studentData = {
-      ...this.formEdit.value,
-      id: this.student ? this.student.id : null
-    };
+    const studentData = { ...this.formEdit.value };
+
+    if (this.student && this.student.id) {
+      studentData.id = this.student.id;
+    }
 
     if (this.formEdit.valid) {
       this.matdialogRef.close(studentData);

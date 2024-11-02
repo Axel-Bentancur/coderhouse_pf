@@ -60,10 +60,11 @@ export class FormEditCourseComponent {
   }
 
   onSubmit(): void {
-    const courseData = {
-      ...this.formEdit.value,
-      id: this.course ? this.course.id : null
-    };
+    const courseData = { ...this.formEdit.value };
+
+    if (this.course && this.course.id) {
+      courseData.id = this.course.id;
+    }
 
     if (this.formEdit.valid) {
       this.matdialogRef.close(courseData);
