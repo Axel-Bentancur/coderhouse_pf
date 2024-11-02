@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentsService } from '../../../core/services/students.service';
 import { IStudent } from '../../../core/models';
 
@@ -15,7 +15,9 @@ export class StudentProfileComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private studentsService: StudentsService) {
+    private studentsService: StudentsService,
+    private router: Router,
+  ) {
       this.idUsuario = activatedRoute.snapshot.params['id'];
   }
 
@@ -37,6 +39,10 @@ export class StudentProfileComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/dashboard/students']);
   }
 
 }
