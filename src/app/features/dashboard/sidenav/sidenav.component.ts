@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
+import { Component, Input, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,10 +7,15 @@ import { MatDrawer } from '@angular/material/sidenav';
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
-  @ViewChild('drawer') drawer!: MatDrawer;
+  @Input() closeDrawer!: () => void;
 
-  toggleDrawer() {
-    this.drawer.toggle();
+  constructor(private router: Router) {}
+
+  navigation(route: string) {
+    if (this.closeDrawer) {
+      this.closeDrawer();
+    }
+    this.router.navigate([route]);
   }
 }
 

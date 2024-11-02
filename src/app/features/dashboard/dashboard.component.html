@@ -3,7 +3,7 @@
 
     <!-- LATERAL MENU -->
     <mat-drawer #drawer [mode]='"over"'>
-      <app-sidenav></app-sidenav>
+      <app-sidenav [closeDrawer]="closeSidenav.bind(this)"></app-sidenav>
     </mat-drawer>
 
     <div>

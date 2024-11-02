@@ -13,4 +13,8 @@ export class DashboardComponent {
   onToggleSidenav() {
     this.drawer.toggle();
   }
+
+  closeSidenav() {
+    this.drawer.close();
+  }
 }
