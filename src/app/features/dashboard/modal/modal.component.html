@@ -1,5 +1,5 @@
 <div class="modal-container">
-  <ng-container *ngIf="action === 'Delete'; else formTemplate">
+  <ng-container *ngIf="action === 'Delete' || action === 'Remove'; else formTemplate">
     <p>
       Are you sure you want to delete <span>{{ displayName }}</span>?
     </p>

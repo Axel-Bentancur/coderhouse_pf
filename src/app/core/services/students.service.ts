@@ -28,13 +28,13 @@ export class StudentsService {
     });
   }
 
-  updateStudents(id: number, update: Partial<IStudent>) {
+  updateStudents(id: string, update: Partial<IStudent>) {
     return this.httpClient
       .patch<IStudent>(`${this.baseURL}/students/${id}`, update)
       .pipe(concatMap(() => this.getStudents()));
   }
 
-  deleteStudent(id: number): Observable<IStudent[]> {
+  deleteStudent(id: string): Observable<IStudent[]> {
     return this.httpClient
       .delete<void>(`${this.baseURL}/students/${id}`)
       .pipe(concatMap(() => this.getStudents()));

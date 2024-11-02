@@ -9,7 +9,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { IStudent, AuthData } from '../models';
 
 const mockStudent: IStudent = {
-  id: 1,
+  id: "A7hB",
   firstName: "Juandos",
   lastName: "Perez",
   address: "Calle Falsa 123",

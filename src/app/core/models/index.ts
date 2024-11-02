@@ -1,6 +1,6 @@
 // STUDENT INTERFACE
 export interface IStudent  {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   address: string;
@@ -14,7 +14,7 @@ export interface IStudent  {
 
 // INTERFACE FOR COURSE
 export interface ICourse {
-  id: number;
+  id: string;
   courseName: string;
   teacherName: string;
   courseClassQty: number;

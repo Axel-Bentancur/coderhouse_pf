@@ -15,7 +15,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Select Student</mat-label>
           <mat-select formControlName="selectedStudent">
-            <mat-option *ngFor="let student of studentList" [value]="student.id">
+            <mat-option *ngFor="let student of studentList" [value]="student">
               {{ student.firstName }} {{ student.lastName }}
             </mat-option>
           </mat-select>

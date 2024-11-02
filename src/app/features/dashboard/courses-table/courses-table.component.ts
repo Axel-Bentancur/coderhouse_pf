@@ -46,7 +46,7 @@ export class CoursesTableComponent implements OnInit{
     });
   }
 
-  updateCourse(id: number, update: ICourse):void {
+  updateCourse(id: string, update: ICourse):void {
     this.isLoading = true;
     this.coursesService.updateCourse(id, update).subscribe({
       next: (course) => {
@@ -58,7 +58,7 @@ export class CoursesTableComponent implements OnInit{
     })
   }
 
-  deleteCourse(id: number): void {
+  deleteCourse(id: string): void {
     this.isLoading = true;
     this.coursesService.deleteCourse(id).subscribe({
       next: (course) => {

@@ -29,19 +29,19 @@ export class CoursesService {
     });
   }
 
-  updateCourse(id: number, update: Partial<ICourse>) {
+  updateCourse(id: string, update: Partial<ICourse>) {
     return this.httpClient
       .patch<ICourse>(`${this.baseURL}/courses/${id}`, update)
       .pipe(concatMap(() => this.getCourses()));
   }
 
-  deleteCourse(id: number): Observable<ICourse[]> {
+  deleteCourse(id: string): Observable<ICourse[]> {
     return this.httpClient
       .delete<void>(`${this.baseURL}/courses/${id}`)
       .pipe(concatMap(() => this.getCourses()));
   }
 
-  addStudentToCourse(courseId: number, studentId: number): Observable<ICourse> {
+  addStudentToCourse(courseId: string, studentId: string): Observable<ICourse> {
     return this.httpClient.get<ICourse>(`${this.baseURL}/courses/${courseId}`).pipe(
       switchMap(course => {
         if (course) {
@@ -66,7 +66,7 @@ export class CoursesService {
   }
 
 
-  deleteStudent(courseId: number, studentId: number): Observable<ICourse> {
+  deleteStudent(courseId: string, studentId: string): Observable<ICourse> {
     return this.httpClient.get<ICourse>(`${this.baseURL}/courses/${courseId}`).pipe(
       switchMap(course => {
         if (course) {

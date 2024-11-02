@@ -22,12 +22,9 @@
             <div>
               <ng-container *ngIf="course.studentList && course.studentList.length > 0; else noStudents">
                 <ng-container *ngFor="let student of course.studentList;">
-                  <mat-chip-row
-                    (removed)="removeStudent(course.id, student.id)"
-                    class="dropdown__container__content__chip"
-                  >
+                  <mat-chip-row class="dropdown__container__content__chip">
                     {{ student.firstName }}
-                    <button matChipRemove [attr.aria-label]="'Remove ' + student.firstName">
+                    <button matChipRemove aria-label="remove" (click)="openDialog('Course', 'Remove', course, student)">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip-row>
@@ -37,8 +34,8 @@
                 <p class="course__msg">No students in this course.</p>
               </ng-template>
             </div>
-            <button mat-icon-button aria-label="delete" (click)="openDialog('Add', 'Course', course)">
-              <mat-icon class="delete-icon">person_add</mat-icon>
+            <button mat-icon-button aria-label="Add" (click)="openDialog('Course', 'Add', course)">
+              <mat-icon class="add-icon">person_add</mat-icon>
             </button>
           </div>
         </mat-expansion-panel>

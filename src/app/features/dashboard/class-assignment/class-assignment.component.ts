@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { ICourse } from '../../../core/models';
+import { ICourse, IStudent } from '../../../core/models';
 import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
@@ -31,10 +31,9 @@ export class ClassAssignmentComponent implements OnInit{
         this.isLoading = false;
       }
     });
-    console.log(this.courses)
   }
 
-  addStudent(courseId: number, studentId: number): void {
+  addStudent(courseId: string, studentId: string): void {
     this.isLoading = true;
     this.coursesService.addStudentToCourse(courseId, studentId).subscribe({
       next: (course) => {
@@ -58,7 +57,7 @@ export class ClassAssignmentComponent implements OnInit{
     });
   }
 
-  removeStudent(courseId: number, studentId: number): void {
+  removeStudent(courseId: string, studentId: string): void {
     this.isLoading = true;
     this.coursesService.deleteStudent(courseId, studentId).subscribe({
       next: (updatedCourse) => {
@@ -78,20 +77,27 @@ export class ClassAssignmentComponent implements OnInit{
     });
   }
 
-  openDialog(action: 'Add', entity: string, element: ICourse | null): void {
+  openDialog(modalType: string, action: string, element: ICourse | null,  student?: IStudent): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: {
+        modalType: modalType,
         action: action,
-        entity: entity,
         element: element,
+        student
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       const courseId = element?.id
-      if (!!result && courseId) {
-          this.addStudent(courseId, result)
+      const studentId = student?.id
+
+      if (!!result) {
+        if (action === 'Add' && courseId && result.id) {
+          this.addStudent(courseId, result.id)
+        } else if (action === 'Remove' && courseId && studentId) {
+          this.removeStudent(courseId, studentId)
+        }
       }
     });
   }

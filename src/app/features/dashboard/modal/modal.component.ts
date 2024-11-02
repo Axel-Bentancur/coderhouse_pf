@@ -17,11 +17,12 @@ export class  ModalComponent {
 
   constructor(
     private matdialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { modalType: string; action: string; element: IStudent | ICourse | null }
+    @Inject(MAT_DIALOG_DATA) public data: { modalType: string; action: string; element: IStudent | ICourse | null, student: IStudent }
   ) {
     this.element = data.element;
     this.action = data.action;
     this.modalType = data.modalType;
+    this.student = data.student || null;
 
     if (this.element) {
       if (this.modalType === 'Student') {
@@ -30,6 +31,10 @@ export class  ModalComponent {
       } else if (this.modalType === 'Course') {
         this.course = this.element as ICourse;
         this.displayName = this.course.courseName;
+
+        if (this.student) {
+          this.displayName = `${this.student.firstName} ${this.student.lastName}`;
+        }
       }
     } else {
       console.warn('No element provided for modal.');

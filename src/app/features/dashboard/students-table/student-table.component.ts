@@ -46,7 +46,7 @@ export class StudentTableComponent implements OnInit{
   }
 
 
-  updateUsers(id: number, update: Partial<IStudent>): void {
+  updateUsers(id: string, update: Partial<IStudent>): void {
     this.isLoading = true;
     this.StudentsService.updateStudents(id, update).subscribe({
       next: (users) => {
@@ -58,7 +58,7 @@ export class StudentTableComponent implements OnInit{
     });
   }
 
-  deleteUsers(id: number): void {
+  deleteUsers(id: string): void {
     this.isLoading = true;
     this.StudentsService.deleteStudent(id).subscribe({
       next: (users) => {
