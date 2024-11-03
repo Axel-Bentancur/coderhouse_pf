@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICourse, IStudent } from '../../../../core/models';
 import { StudentsService } from '../../../../core/services/students.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-add-course',
@@ -36,6 +37,23 @@ export class FormAddCourseComponent {
     this.studentsService.getStudents().subscribe({
       next: (students) => {
         this.studentList = students;
+      },
+      error: (err) => {
+        if (err instanceof Error) {
+          console.error(`An unexpected error occurred: ${err.message}`);
+        } else if (err instanceof HttpErrorResponse) {
+          if (err.status === 0) {
+            console.error('Could not connect to the server. Please check your network connection.');
+          } else if (err.status >= 400 && err.status < 500) {
+            console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+          } else if (err.status >= 500) {
+            console.error('Server error: Please try again later.');
+          } else {
+            console.error(`Unexpected error: ${err.statusText}`);
+          }
+        } else {
+          console.error('An unknown error occurred. Please try again later.');
+        }
       },
       complete: () => {
         this.isLoading = false;

@@ -35,19 +35,24 @@ export class LoginComponent {
 
   doLogin(){
     this.authService.login(this.formLogin.value).subscribe({
-      next: (result) => {
+      next: () => {
         this.router.navigate(['dashboard', 'students'])
-        console.log(result)
       },
       error: (err) => {
-        console.error(err);
         if (err instanceof Error) {
-            alert(err.message);
-        }
-        if (err instanceof HttpErrorResponse) {
-            if (err.status === 0) {
-                alert('Could not connect to the server');
-            }
+          console.error(`An unexpected error occurred: ${err.message}`);
+        } else if (err instanceof HttpErrorResponse) {
+          if (err.status === 0) {
+            console.error('Could not connect to the server. Please check your network connection.');
+          } else if (err.status >= 400 && err.status < 500) {
+            console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+          } else if (err.status >= 500) {
+            console.error('Server error: Please try again later.');
+          } else {
+            console.error(`Unexpected error: ${err.statusText}`);
+          }
+        } else {
+          console.error('An unknown error occurred. Please try again later.');
         }
       },
     })
@@ -58,7 +63,7 @@ export class LoginComponent {
       this.doLogin();
     } else {
       this.formLogin.markAllAsTouched();
-      console.error('Form is invalid', this.formLogin.errors);
+      console.error('Form is invalid');
     }
   }
 }

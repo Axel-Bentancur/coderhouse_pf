@@ -3,6 +3,7 @@ import { ICourse } from '../../../core/models';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { CoursesService } from '../../../core/services/courses.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-courses-table',
@@ -21,12 +22,31 @@ export class CoursesTableComponent implements OnInit{
     this.loadCourses()
   }
 
+  handleError(err: any): void {
+    if (err instanceof Error) {
+      console.error(`An unexpected error occurred: ${err.message}`);
+    } else if (err instanceof HttpErrorResponse) {
+      if (err.status === 0) {
+        console.error('Could not connect to the server. Please check your network connection.');
+      } else if (err.status >= 400 && err.status < 500) {
+        console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+      } else if (err.status >= 500) {
+        console.error('Server error: Please try again later.');
+      } else {
+        console.error(`Unexpected error: ${err.statusText}`);
+      }
+    } else {
+      console.error('An unknown error occurred. Please try again later.');
+    }
+  }
+
   loadCourses(): void {
     this.isLoading = true;
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.courses = courses;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -40,6 +60,7 @@ export class CoursesTableComponent implements OnInit{
       next: (course) => {
         this.courses.push(course);
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -52,6 +73,7 @@ export class CoursesTableComponent implements OnInit{
       next: (course) => {
         this.courses = course;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -64,6 +86,7 @@ export class CoursesTableComponent implements OnInit{
       next: (course) => {
         this.courses = course;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }

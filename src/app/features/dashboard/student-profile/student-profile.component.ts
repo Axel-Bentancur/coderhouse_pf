@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentsService } from '../../../core/services/students.service';
 import { IStudent } from '../../../core/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-profile',
@@ -32,7 +33,21 @@ export class StudentProfileComponent implements OnInit {
         this.student = user;
       },
       error: (err) => {
-        console.error('Error loading student data:', err);
+        if (err instanceof Error) {
+          console.error(`An unexpected error occurred: ${err.message}`);
+        } else if (err instanceof HttpErrorResponse) {
+          if (err.status === 0) {
+            console.error('Could not connect to the server. Please check your network connection.');
+          } else if (err.status >= 400 && err.status < 500) {
+            console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+          } else if (err.status >= 500) {
+            console.error('Server error: Please try again later.');
+          } else {
+            console.error(`Unexpected error: ${err.statusText}`);
+          }
+        } else {
+          console.error('An unknown error occurred. Please try again later.');
+        }
         this.isLoading = false;
       },
       complete: () => {

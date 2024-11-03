@@ -3,6 +3,7 @@ import { IStudent } from '../../../core/models';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { StudentsService } from '../../../core/services/students.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-table',
@@ -21,12 +22,31 @@ export class StudentTableComponent implements OnInit{
     this.loadUsers()
   }
 
+  handleError(err: any): void {
+    if (err instanceof Error) {
+      console.error(`An unexpected error occurred: ${err.message}`);
+    } else if (err instanceof HttpErrorResponse) {
+      if (err.status === 0) {
+        console.error('Could not connect to the server. Please check your network connection.');
+      } else if (err.status >= 400 && err.status < 500) {
+        console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+      } else if (err.status >= 500) {
+        console.error('Server error: Please try again later.');
+      } else {
+        console.error(`Unexpected error: ${err.statusText}`);
+      }
+    } else {
+      console.error('An unknown error occurred. Please try again later.');
+    }
+  }
+
   loadUsers(): void {
     this.isLoading = true;
     this.StudentsService.getStudents().subscribe({
       next: (users) => {
         this.students = users;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -39,6 +59,7 @@ export class StudentTableComponent implements OnInit{
       next: (newStudent) => {
         this.students.push(newStudent);
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -52,6 +73,7 @@ export class StudentTableComponent implements OnInit{
       next: (users) => {
         this.students = users;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -64,6 +86,7 @@ export class StudentTableComponent implements OnInit{
       next: (users) => {
         this.students = users;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }

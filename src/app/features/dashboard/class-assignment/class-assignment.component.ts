@@ -3,6 +3,7 @@ import { ICourse, IStudent } from '../../../core/models';
 import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-class-assignment',
@@ -21,12 +22,31 @@ export class ClassAssignmentComponent implements OnInit{
     this.loadCourse();
   }
 
+  handleError(err: any): void {
+    if (err instanceof Error) {
+      console.error(`An unexpected error occurred: ${err.message}`);
+    } else if (err instanceof HttpErrorResponse) {
+      if (err.status === 0) {
+        console.error('Could not connect to the server. Please check your network connection.');
+      } else if (err.status >= 400 && err.status < 500) {
+        console.error(`Client error: ${err.error?.message || 'Invalid request. Please try again.'}`);
+      } else if (err.status >= 500) {
+        console.error('Server error: Please try again later.');
+      } else {
+        console.error(`Unexpected error: ${err.statusText}`);
+      }
+    } else {
+      console.error('An unknown error occurred. Please try again later.');
+    }
+  }
+
   loadCourse(): void {
     this.isLoading = true;
     this.coursesService.getCourses().subscribe({
       next: (course) => {
         this.courses = course;
       },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -48,9 +68,7 @@ export class ClassAssignmentComponent implements OnInit{
           console.error('Courses array is null.');
         }
       },
-      error: (err) => {
-        console.error('Error adding student:', err);
-      },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
@@ -68,9 +86,7 @@ export class ClassAssignmentComponent implements OnInit{
           }
         }
       },
-      error: (err) => {
-        console.error('Error removing student:', err);
-      },
+      error: (err) => this.handleError(err),
       complete: () => {
         this.isLoading = false;
       }
