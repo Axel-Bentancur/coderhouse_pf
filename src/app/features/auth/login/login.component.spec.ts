@@ -55,14 +55,13 @@ describe('LoginComponent', () => {
     component.onSubmit();
 
     expect(component.formLogin.valid).toBeFalse();
-    expect(console.error).toHaveBeenCalledWith('Form is invalid', component.formLogin.errors);
+    expect(console.error).toHaveBeenCalledWith('Form is invalid');
   });
 
-  // NO LOGRO HACERLO FUNCIONAR
-  xit('should calling onSubmit, it should call login from AuthService.', () => {
+  it('should calling onSubmit, it should call login from AuthService.', () => {
     component.formLogin.setValue({
-      email: 'fake@mail.com',
-      password: '123456',
+      email: 'jose.rodriguez@example.com',
+      password: 'JosePwd5%',
       rememberMe: true,
     });
 
@@ -70,6 +69,4 @@ describe('LoginComponent', () => {
     component.onSubmit();
     expect(spyOnLogin).toHaveBeenCalled();
   });
-
-
 });
