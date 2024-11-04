@@ -25,7 +25,7 @@ const mockAuthData: AuthData = {
   password: "SecurePass1!",
 };
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let service: AuthService;
   let httpContoller: HttpTestingController;
   let router: Router;
