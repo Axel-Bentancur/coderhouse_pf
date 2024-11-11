@@ -1,23 +1,25 @@
 import { Injectable } from "@angular/core";
-import { AuthData, IStudent } from "../models";
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
+import { AuthData, IUser } from "../models";
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { map } from 'rxjs';
+import { Store } from "@ngrx/store";
+import { AuthActions } from "../../features/auth/store/auth.actions";
+import { selectAuthenticatedUser } from "../../features/auth/store/auth.selectors";
 
 @Injectable ({ providedIn: 'root'})
 export class AuthService {
 
-  private _authUser$ = new BehaviorSubject<null | IStudent>(null);
-  public authUser$ = this._authUser$.asObservable();
+  public authUser$: Observable<IUser | null>
   private baseURL = environment.apiBaseUrl;
 
-  private handleAuthentication(students: IStudent[]): IStudent | null {
-    if(!!students[0]){
-      this._authUser$.next(students[0]);
-      localStorage.setItem('token', students[0].token);
-      return students[0];
+  private handleAuthentication(users: IUser[]): IUser | null {
+    if(!!users[0]){
+      this.store.dispatch(AuthActions.setAuthenticatedUser({user: users[0]}))
+      localStorage.setItem('token', users[0].token);
+      return users[0];
     } else {
       return null
     }
@@ -25,18 +27,21 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private httpClient: HttpClient
-  ){}
+    private httpClient: HttpClient,
+    private store: Store
+  ){
+    this.authUser$ = this.store.select(selectAuthenticatedUser)
+  }
 
 
-  login(data: AuthData): Observable<IStudent> {
-    return this.httpClient.get<IStudent[]>(
-      `${this.baseURL}/students?email=${data.email}&password=${data.password}`)
+  login(data: AuthData): Observable<IUser> {
+    return this.httpClient.get<IUser[]>(
+      `${this.baseURL}/users?email=${data.email}&password=${data.password}`)
       .pipe(
-        map((students)=> {
-          const student = this.handleAuthentication(students)
-          if(student){
-            return student;
+        map((users)=> {
+          const user = this.handleAuthentication(users)
+          if(user){
+            return user;
           } else {
             throw new Error('Invalid Data');
           }
@@ -45,19 +50,25 @@ export class AuthService {
   }
 
   logout(){
-    this._authUser$.next(null)
+    this.store.dispatch(AuthActions.unsetAuthenticatedUser())
     this.router.navigate(['auth'])
     localStorage.removeItem('token')
   }
 
   verifyToken(): Observable<boolean> {
-    return this.httpClient.get<IStudent[]>(
-      `${this.baseURL}/students?token=${localStorage.getItem('token')}`
+    return this.httpClient.get<IUser[]>(
+      `${this.baseURL}/users?token=${localStorage.getItem('token')}`
     ).pipe(
-      map((students)=> {
-        const student = this.handleAuthentication(students);
-        return !!student;
+      map((users)=> {
+        const user = this.handleAuthentication(users);
+        return !!user;
       })
     )
+  }
+
+  getUserRole(): Observable<boolean> {
+    return this.authUser$.pipe(
+      map(user => user ? user.role === 'ADMIN' : false)
+    );
   }
 }

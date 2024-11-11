@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ICourse, IStudent } from '../models';
-import { concatMap, Observable, of, switchMap, throwError } from 'rxjs';
+import { concatMap, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -23,10 +23,10 @@ export class CoursesService {
     return this.httpClient.get<ICourse[]>(`${this.baseURL}/courses`);
   }
 
-  createCourse(course: Omit<ICourse, 'id'>): Observable<ICourse> {
-    return this.httpClient.post<ICourse>(`${this.baseURL}/courses`, {
-      ...course,
-    });
+  createCourse(course: Omit<ICourse, 'id'>): Observable<ICourse[]> {
+    return this.httpClient.post<ICourse>(`${this.baseURL}/courses`, course).pipe(
+      concatMap(() => this.getCourses())
+    );
   }
 
   updateCourse(id: string, update: Partial<ICourse>) {
@@ -41,45 +41,42 @@ export class CoursesService {
       .pipe(concatMap(() => this.getCourses()));
   }
 
-  addStudentToCourse(courseId: string, studentId: string): Observable<ICourse> {
+  addStudentToCourse(courseId: string, studentId: string): Observable<ICourse[]> {
     return this.httpClient.get<ICourse>(`${this.baseURL}/courses/${courseId}`).pipe(
       switchMap(course => {
         if (course) {
-          if (!course.studentList || course.studentList.length === 0) {
-            course.studentList = [];
+          if (!course.studentsList) {
+            course.studentsList = [];
           }
-          const studentExists = course.studentList.some(student => student.id === studentId);
+          const studentExists = course.studentsList.some(student => student.id === studentId);
           if (!studentExists) {
             return this.httpClient.get<IStudent>(`${this.baseURL}/students/${studentId}`).pipe(
               switchMap(newStudent => {
-                course.studentList.push(newStudent);
-                return this.httpClient.patch<ICourse>(`${this.baseURL}/courses/${courseId}`, { studentList: course.studentList });
-              })
+                course.studentsList.push(newStudent);
+                return this.httpClient.patch<ICourse>(`${this.baseURL}/courses/${courseId}`, { studentsList: course.studentsList });
+              }),
+              switchMap(() => this.httpClient.get<ICourse[]>(`${this.baseURL}/courses`))
             );
           } else {
-            return of(course);
+            return this.httpClient.get<ICourse[]>(`${this.baseURL}/courses`);
           }
         }
-        return throwError('Course not found');
+        return throwError(() => new Error('Course not found'));
       })
     );
   }
 
-
-  deleteStudent(courseId: string, studentId: string): Observable<ICourse> {
+  deleteStudent(courseId: string, studentId: string): Observable<ICourse[]> {
     return this.httpClient.get<ICourse>(`${this.baseURL}/courses/${courseId}`).pipe(
       switchMap(course => {
         if (course) {
-          if (course.studentList) {
-            course.studentList = course.studentList.filter(student => student.id !== studentId);
-          } else {
-            course.studentList = [];
-          }
-          return this.httpClient.patch<ICourse>(`${this.baseURL}/courses/${courseId}`, { studentList: course.studentList });
+          course.studentsList = course.studentsList?.filter(student => student.id !== studentId) || [];
+          return this.httpClient.patch<ICourse>(`${this.baseURL}/courses/${courseId}`, { studentsList: course.studentsList }).pipe(
+            switchMap(() => this.httpClient.get<ICourse[]>(`${this.baseURL}/courses`))
+          );
         }
-        return throwError('Course not found');
+        return throwError(() => new Error('Course not found'));
       })
     );
   }
-
 }

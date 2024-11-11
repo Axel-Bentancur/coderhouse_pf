@@ -138,6 +138,16 @@ export const sexValidator: ValidatorFn = (control: AbstractControl) => {
   return null;
 };
 
+export const roleValidator: ValidatorFn = (control: AbstractControl) => {
+  const value = control.value;
+
+  if (!value) {
+    return { error_msg: "Please select a role." };
+  }
+
+  return null;
+};
+
 // COURSES VALIDATORS
 
 export const courseNameValidator: (fieldName: string) => ValidatorFn = (fieldName: string) => {

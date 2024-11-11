@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ICourse } from '../../../core/models';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
-import { CoursesService } from '../../../core/services/courses.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { CourseActions } from './store/course.actions';
+import { Observable } from 'rxjs';
+import { selectIsLoading, selectCourses } from './store/course.selectors';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-courses-table',
@@ -11,15 +15,29 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './courses-table.component.scss'
 })
 export class CoursesTableComponent implements OnInit{
-  courses:ICourse[] = []
-  isLoading = false;
-  displayedColumns: string[] = ['id', 'courseName', 'courseClassQty', 'hoursQty', 'teacherName', 'edit', 'delete'];
+  role$: Observable<boolean>;
+  courses$: Observable<ICourse[]>
+  isLoading$: Observable<boolean>;
+  displayedColumns: string[] = ['id', 'courseName', 'courseClassQty', 'hoursQty', 'teacherName'];
 
-  constructor(public dialog: MatDialog, private coursesService: CoursesService) {
+  constructor(
+    public dialog: MatDialog,
+    private store: Store,
+    private authService: AuthService
+  ) {
+    this.courses$ = this.store.select(selectCourses),
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.role$ = authService.getUserRole()
   }
 
   ngOnInit(): void {
-    this.loadCourses()
+    this.store.dispatch(CourseActions.loadCourses());
+
+    this.role$.subscribe(role => {
+      if (role) {
+        this.displayedColumns.push('edit', 'delete');
+      }
+    });
   }
 
   handleError(err: any): void {
@@ -40,57 +58,16 @@ export class CoursesTableComponent implements OnInit{
     }
   }
 
-  loadCourses(): void {
-    this.isLoading = true;
-    this.coursesService.getCourses().subscribe({
-      next: (courses) => {
-        this.courses = courses;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
-  }
-
-
   createCourse(course: ICourse): void {
-    this.isLoading = true;
-    this.coursesService.createCourse(course).subscribe({
-      next: (course) => {
-        this.courses.push(course);
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(CourseActions.createCourse({ course }));
   }
 
-  updateCourse(id: string, update: ICourse):void {
-    this.isLoading = true;
-    this.coursesService.updateCourse(id, update).subscribe({
-      next: (course) => {
-        this.courses = course;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
+  updateCourse(id: string, update: Partial<ICourse>):void {
+    this.store.dispatch(CourseActions.updateCourse({ id, update }));
   }
 
   deleteCourse(id: string): void {
-    this.isLoading = true;
-    this.coursesService.deleteCourse(id).subscribe({
-      next: (course) => {
-        this.courses = course;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
+    this.store.dispatch(CourseActions.deleteCourse({ id }));
   }
 
   openDialog(modalType: string, action: string, element: ICourse | null): void {

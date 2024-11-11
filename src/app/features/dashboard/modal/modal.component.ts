@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ICourse, IStudent } from '../../../core/models';
+import { ICourse, IStudent, IUser } from '../../../core/models';
 
 @Component({
   selector: 'app-modal',
@@ -8,16 +8,17 @@ import { ICourse, IStudent } from '../../../core/models';
   styleUrl: './modal.component.scss'
 })
 export class  ModalComponent {
+  user: IUser | null = null;
   student: IStudent | null = null;
   course: ICourse | null = null;
-  element: IStudent | ICourse | null = null;
+  element: IStudent | ICourse | IUser | null = null;
   action: string = '';
   modalType: string = '';
   displayName: string = '';
 
   constructor(
     private matdialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { modalType: string; action: string; element: IStudent | ICourse | null, student: IStudent }
+    @Inject(MAT_DIALOG_DATA) public data: { modalType: string; action: string; element: IStudent | ICourse | IUser | null, student: IStudent }
   ) {
     this.element = data.element;
     this.action = data.action;
@@ -35,6 +36,9 @@ export class  ModalComponent {
         if (this.student) {
           this.displayName = `${this.student.firstName} ${this.student.lastName}`;
         }
+      } else if (this.modalType === 'User') {
+        this.user = this.element as IUser;
+        this.displayName = `${this.user.firstName} ${this.user.lastName}`;
       }
     } else {
       console.warn('No element provided for modal.');

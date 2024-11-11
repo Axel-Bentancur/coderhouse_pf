@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { FormEditStudentModule } from '../forms/form-edit-student/form-edit-student.module';
 import { FormEditCourseModule } from '../forms/form-edit-course/form-edit-course.module';
 import { FormAddCourseModule } from '../forms/form-add-course/form-add-course.module';
+import { FormEditUserModule } from '../forms/form-edit-user/form-edit-user.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FormAddCourseModule } from '../forms/form-add-course/form-add-course.mo
     FormEditStudentModule,
     FormEditCourseModule,
     FormAddCourseModule,
+    FormEditUserModule,
   ],
   exports: [ModalComponent]
 })

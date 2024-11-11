@@ -1,3 +1,15 @@
+// USERS INTERFACE
+export interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  email: string;
+  password: string;
+  token: string;
+  role: string;
+}
+
 // STUDENT INTERFACE
 export interface IStudent  {
   id: string;
@@ -7,9 +19,6 @@ export interface IStudent  {
   phone: string;
   email: string;
   photo: string;
-  password: string;
-  token: string;
-  courses: ICourse[];
 }
 
 // INTERFACE FOR COURSE
@@ -19,7 +28,7 @@ export interface ICourse {
   teacherName: string;
   courseClassQty: number;
   hoursQty: number;
-  studentList: IStudent[];
+  studentsList: IStudent[]
 }
 
 // ATUH INTERFACE

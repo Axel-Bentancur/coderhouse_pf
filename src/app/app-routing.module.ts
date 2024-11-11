@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './features/auth/auth.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth.guard';
+import { roleGuard } from './core/guards/role.guard';
+import { UserTableComponent } from './features/dashboard/users-table/user-table.component';
 
 const routes: Routes = [
   {

@@ -9,6 +9,8 @@ import { RegisterComponent } from './register/register.component';
 // MODULES
 import { SharedModule } from '../../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { AuthRoutingModule } from './auth-routing.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    EffectsModule.forFeature([AuthEffects]),
   ]
 })
 export class AuthModule { }

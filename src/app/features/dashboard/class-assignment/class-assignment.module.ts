@@ -6,6 +6,10 @@ import { ClassAssignmentComponent } from './class-assignment.component';
 
 // MODULES
 import { SharedModule } from '../../../shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
+import { ClassEffects } from './store/class.effects';
+import { StoreModule } from '@ngrx/store';
+import { classFeature } from './store/class.reducer';
 
 
 @NgModule({
@@ -15,6 +19,9 @@ import { SharedModule } from '../../../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+
+    StoreModule.forFeature(classFeature),
+    EffectsModule.forFeature([ClassEffects]),
   ],
   exports: [
     ClassAssignmentComponent

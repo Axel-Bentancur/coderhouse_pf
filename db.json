@@ -1,16 +1,35 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Juan",
+      "lastName": "Perez",
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+      "email": "juan.perez@example.com",
+      "password": "SecurePass1!",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JuanPerez",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "firstName": "Marí",
+      "lastName": "Gomez",
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+      "email": "maria.gomez@example.com",
+      "password": "StrongPwd2@",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MariaGomez",
+      "role": "CLIENT"
+    }
+  ],
   "students": [
     {
       "id": "1",
-      "firstName": "Juandos",
+      "firstName": "Juan",
       "lastName": "Perez",
       "address": "Calle Falsa 123",
       "phone": "1234567891",
       "email": "juan.perez@example.com",
-      "password": "SecurePass1!",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JuanPerez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "2",
@@ -19,10 +38,7 @@
       "address": "Av. Siempre Viva 456",
       "phone": "9876543212",
       "email": "maria.gomez@example.com",
-      "password": "StrongPwd2@",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MariaGomez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "3",
@@ -31,10 +47,7 @@
       "address": "Calle Solitaria 789",
       "phone": "5551234563",
       "email": "carlos.lopez@example.com",
-      "password": "CarlosPass3#",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.CarlosLopez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "4",
@@ -43,10 +56,7 @@
       "address": "Av. Libertad 321",
       "phone": "1231231234",
       "email": "ana.martinez@example.com",
-      "password": "AnaSecure4$",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.AnaMartinez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "5",
@@ -55,10 +65,7 @@
       "address": "Calle Pradera 654",
       "phone": "9879879875",
       "email": "jose.rodriguez@example.com",
-      "password": "JosePwd5%",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JoseRodriguez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "6",
@@ -67,10 +74,7 @@
       "address": "Av. Colina 234",
       "phone": "1112223336",
       "email": "lucia.hernandez@example.com",
-      "password": "LuciaPass6&",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.LuciaHernandez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "7",
@@ -79,10 +83,7 @@
       "address": "Calle Arboleda 567",
       "phone": "4445556667",
       "email": "miguel.sanchez@example.com",
-      "password": "Miguel7Pwd*",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MiguelSanchez",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "8",
@@ -91,10 +92,7 @@
       "address": "Av. Central 678",
       "phone": "3334445558",
       "email": "laura.diaz@example.com",
-      "password": "LauraSafe8#",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.LauraDiaz",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "9",
@@ -103,10 +101,7 @@
       "address": "Calle Norte 890",
       "phone": "2223334449",
       "email": "david.morales@example.com",
-      "password": "DavidPwd9@",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.DavidMorales",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     },
     {
       "id": "10",
@@ -115,10 +110,7 @@
       "address": "Av. Sur 123",
       "phone": "6667778880",
       "email": "paula.ortega@example.com",
-      "password": "PaulaPwd10!",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.PaulaOrtega",
-      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-      "courses": []
+      "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
     }
   ],
   "courses": [
@@ -128,27 +120,7 @@
       "courseClassQty": "5",
       "hoursQty": "40",
       "teacherName": "John Doe",
-      "studentList": []
-    },
-    {
-      "id": "2",
-      "courseName": "Advanced JavaScript",
-      "courseClassQty": "4",
-      "hoursQty": "32",
-      "teacherName": "Jane Smith",
-      "studentList": [
-        {
-          "id": "2",
-          "firstName": "María",
-          "lastName": "Gomez",
-          "address": "Av. Siempre Viva 456",
-          "phone": "9876543212",
-          "email": "maria.gomez@example.com",
-          "password": "StrongPwd2@",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MariaGomez",
-          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-          "courses": []
-        },
+      "studentsList": [
         {
           "id": "6",
           "firstName": "Lucía",
@@ -156,61 +128,106 @@
           "address": "Av. Colina 234",
           "phone": "1112223336",
           "email": "lucia.hernandez@example.com",
-          "password": "LuciaPass6&",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.LuciaHernandez",
-          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-          "courses": []
+          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
         }
       ]
+    },
+    {
+      "id": "2",
+      "courseName": "Advanced JavaScript",
+      "courseClassQty": "4",
+      "hoursQty": "32",
+      "teacherName": "Jane Smith",
+      "studenstList": []
     },
     {
       "id": "3",
       "courseName": "Database Fundamentals",
       "courseClassQty": "6",
       "hoursQty": "48",
-      "teacherName": "Michael Johnson"
+      "teacherName": "Michael Johnson",
+      "studenstList": []
     },
     {
       "id": "4",
       "courseName": "Web Development with React",
       "courseClassQty": "7",
       "hoursQty": "56",
-      "teacherName": "Emily Davis"
+      "teacherName": "Emily Davis",
+      "studenstList": [],
+      "studentsList": [
+        {
+          "id": "2",
+          "firstName": "María",
+          "lastName": "Gomez",
+          "address": "Av. Siempre Viva 456",
+          "phone": "9876543212",
+          "email": "maria.gomez@example.com",
+          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+        }
+      ]
     },
     {
       "id": "5",
       "courseName": "Data Structures and Algorithms",
       "courseClassQty": "8",
       "hoursQty": "64",
-      "teacherName": "Chris Wilson"
+      "teacherName": "Chris Wilson",
+      "studenstList": [],
+      "studentsList": [
+        {
+          "id": "2",
+          "firstName": "María",
+          "lastName": "Gomez",
+          "address": "Av. Siempre Viva 456",
+          "phone": "9876543212",
+          "email": "maria.gomez@example.com",
+          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+        }
+      ]
     },
     {
       "id": "6",
       "courseName": "Machine Learning Basics",
       "courseClassQty": "6",
       "hoursQty": "48",
-      "teacherName": "Anna Brown"
+      "teacherName": "Anna Brown",
+      "studenstList": []
     },
     {
       "id": "7",
       "courseName": "Software Engineering",
       "courseClassQty": "9",
       "hoursQty": "72",
-      "teacherName": "David Lee"
+      "teacherName": "David Lee",
+      "studenstList": []
     },
     {
       "id": "8",
       "courseName": "Cloud Computing",
       "courseClassQty": "5",
       "hoursQty": "40",
-      "teacherName": "Sarah Green"
+      "teacherName": "Sarah Green",
+      "studenstList": []
     },
     {
       "id": "9",
       "courseName": "Mobile App Development",
       "courseClassQty": "4",
       "hoursQty": "32",
-      "teacherName": "James Miller"
+      "teacherName": "James Miller",
+      "studenstList": [],
+      "studentsList": [
+        {
+          "id": "1",
+          "firstName": "Juandos",
+          "lastName": "Perez",
+          "address": "Calle Falsa 123",
+          "phone": "1234567891",
+          "email": "juan.perez@example.com",
+          "photo": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+        }
+      ]
     }
   ]
 }

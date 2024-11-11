@@ -6,6 +6,8 @@ import { StudentTableComponent } from './students-table/student-table.component'
 import { CoursesTableComponent } from './courses-table/courses-table.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { ClassAssignmentComponent } from './class-assignment/class-assignment.component';
+import { UserTableComponent } from './users-table/user-table.component';
+import { roleGuard } from '../../core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -38,6 +40,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./class-assignment/class-assignment.module').then(
         (m) => m.ClassAssignmentModule
+      ),
+  },
+  {
+    path: 'users',
+    component: UserTableComponent,
+    canActivate: [roleGuard],
+    loadChildren: () =>
+      import('./users-table/user-table.module').then(
+        (m) => m.UserTableModule
       ),
   },
   {

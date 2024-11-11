@@ -1,5 +1,25 @@
-<form class="form-container" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+<div class="card">
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Admin</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>juan.perez&#64;example.com</p>
+      <p>SecurePass1!</p>
+    </mat-card-content>
+  </mat-card>
 
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Guest</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>maria.gomez&#64;example.com</p>
+      <p>StrongPwd2&#64;</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<form class="form-container" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
   <h2>Welcome Back</h2>
   <p>Enter your credentials for login</p>
 

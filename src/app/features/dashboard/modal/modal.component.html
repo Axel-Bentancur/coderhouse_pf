@@ -11,16 +11,25 @@
   </ng-container>
 
   <ng-template #formTemplate>
-    <ng-container *ngIf="modalType === 'Student'; else courseTemplate">
+    <!-- FORM STUDENT -->
+    <ng-container *ngIf="modalType === 'Student'; else courseOrUserTemplate">
       <app-form-edit-student [student]="student" [action]="action" [modalType]="modalType"></app-form-edit-student>
     </ng-container>
 
-    <ng-template #courseTemplate>
-      <ng-container *ngIf="action === 'Add'; else editCourse">
-        <app-form-add-course [course]="course" [action]="action" [modalType]="modalType"></app-form-add-course>
+    <ng-template #courseOrUserTemplate>
+      <!-- FORM COURSE -->
+      <ng-container *ngIf="modalType === 'Course'; else userTemplate">
+        <ng-container *ngIf="action === 'Add'; else editCourse">
+          <app-form-add-course [course]="course" [action]="action" [modalType]="modalType"></app-form-add-course>
+        </ng-container>
+        <ng-template #editCourse>
+          <app-form-edit-course [course]="course" [action]="action" [modalType]="modalType"></app-form-edit-course>
+        </ng-template>
       </ng-container>
-      <ng-template #editCourse>
-        <app-form-edit-course [course]="course" [action]="action" [modalType]="modalType"></app-form-edit-course>
+
+      <!-- FORM USER -->
+      <ng-template #userTemplate>
+        <app-form-edit-user [user]="user" [action]="action" [modalType]="modalType"></app-form-edit-user>
       </ng-template>
     </ng-template>
   </ng-template>

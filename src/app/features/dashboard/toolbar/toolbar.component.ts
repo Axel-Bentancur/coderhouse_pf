@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IStudent } from '../../../core/models';
+import { IUser } from '../../../core/models';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class ToolbarComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
-  authUser$: Observable<IStudent | null>;
+  authUser$: Observable<IUser | null>;
 
   constructor(
     private authService: AuthService,

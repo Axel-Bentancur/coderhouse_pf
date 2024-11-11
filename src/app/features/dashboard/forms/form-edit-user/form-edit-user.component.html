@@ -1,0 +1,73 @@
+<div>
+  <h3 mat-dialog-title>
+    <ng-container>
+      {{action}} Student
+    </ng-container>
+  </h3>
+  <form class="form-container" [formGroup]="formEdit" (ngSubmit)="onSubmit()">
+
+    <!-- FIRSTNAME INPUT-->
+    <mat-form-field class="form-input">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="firstNameControl?.invalid">
+        {{ firstNameControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- LASTNAME INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="lastNameControl?.errors?.['error_msg']">
+        {{ lastNameControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- EMAIL INPUT -->
+    <mat-form-field class="form-input">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="mail@example.com">
+
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="emailControl?.invalid">
+        {{ emailControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- PASSWORD INPUT -->
+    <mat-form-field class="form-input password">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" placeholder="Contraseña" type="password">
+
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="passwordControl?.invalid">
+        {{ passwordControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- ROLE RADIO BUTTON -->
+    <div>
+      <mat-radio-group formControlName="role">
+        <mat-radio-button value="ADMIN">Admin</mat-radio-button>
+        <mat-radio-button value="CLIENT">Client</mat-radio-button>
+      </mat-radio-group>
+
+      <!-- ERROR MSG -->
+      <mat-error *ngIf="roleControl?.invalid">
+        {{ roleControl?.errors?.['error_msg'] }}
+      </mat-error>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div mat-dialog-actions class="modal-btn">
+      <button mat-raised-button (click)="onCancel()">No, Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="formEdit.invalid">Yes, Confirm</button>
+    </div>
+  </form>
+</div>
+

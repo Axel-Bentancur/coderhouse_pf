@@ -7,6 +7,10 @@ import { CoursesTableComponent } from './courses-table.component';
 // MODULES
 import { SharedModule } from '../../../shared/shared.module';
 import { ModalModule } from '../modal/modal.module';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './store/course.effects';
+import { StoreModule } from '@ngrx/store';
+import { courseFeature } from './store/course.reducer';
 
 
 
@@ -19,6 +23,9 @@ import { ModalModule } from '../modal/modal.module';
     SharedModule,
 
     ModalModule,
+
+    StoreModule.forFeature(courseFeature),
+    EffectsModule.forFeature([CourseEffects]),
   ],
   exports: [
     CoursesTableComponent,

@@ -8,6 +8,10 @@ import { StudentTableComponent } from './student-table.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from '../modal/modal.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentEffects } from './store/student.effects';
+import { StoreModule } from '@ngrx/store';
+import { studentFeature } from './store/student.reducer';
 
 
 
@@ -21,6 +25,9 @@ import { ModalModule } from '../modal/modal.module';
     RouterModule,
 
     ModalModule,
+
+    StoreModule.forFeature(studentFeature),
+    EffectsModule.forFeature([StudentEffects]),
   ],
   exports: [ StudentTableComponent ]
 })

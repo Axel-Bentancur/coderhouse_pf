@@ -1,5 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,9 +9,15 @@ import { Router } from '@angular/router';
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
+  role$: Observable<boolean>;
   @Input() closeDrawer!: () => void;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.role$ = authService.getUserRole()
+  }
 
   navigation(route: string) {
     if (this.closeDrawer) {

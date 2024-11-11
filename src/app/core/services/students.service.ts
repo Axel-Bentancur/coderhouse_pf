@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IStudent } from '../models';
-import { concatMap, Observable } from 'rxjs';
+import { ICourse, IStudent } from '../models';
+import { concatMap, map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -22,10 +22,10 @@ export class StudentsService {
     return this.httpClient.get<IStudent[]>(`${this.baseURL}/students`);
   }
 
-  createStudent(student: Omit<IStudent, 'id'>): Observable<IStudent> {
-    return this.httpClient.post<IStudent>(`${this.baseURL}/students`, {
-      ...student,
-    });
+  createStudent(student: Omit<IStudent, 'id'>): Observable<IStudent[]> {
+    return this.httpClient.post<IStudent>(`${this.baseURL}/students`, student).pipe(
+      concatMap(() => this.getStudents())
+    );
   }
 
   updateStudents(id: string, update: Partial<IStudent>) {
@@ -39,4 +39,15 @@ export class StudentsService {
       .delete<void>(`${this.baseURL}/students/${id}`)
       .pipe(concatMap(() => this.getStudents()));
   }
+
+  getCoursesByStudentId(studentId: string): Observable<ICourse[]> {
+    return this.httpClient.get<ICourse[]>(`${this.baseURL}/courses`).pipe(
+      map(courses =>
+        courses.filter(course =>
+          course.studentsList && course.studentsList.some(student => student.id === studentId)
+        )
+      ),
+    );
+  }
+
 }

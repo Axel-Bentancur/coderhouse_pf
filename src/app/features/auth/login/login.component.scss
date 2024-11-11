@@ -1,3 +1,29 @@
+.card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .info-card {
+    width: 50%;
+    font-size: 14px;
+    background-color: #fcf4fb;
+    border: 1px solid #F6D7E8;
+
+    .mat-mdc-card-header {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+  }
+
+  .info-card:nth-child(2) {
+    background-color: #f1eff9;
+    border: 1px solid #DCD0EA;
+  }
+}
+
 .form-container {
   display: flex;
   flex-direction: column;

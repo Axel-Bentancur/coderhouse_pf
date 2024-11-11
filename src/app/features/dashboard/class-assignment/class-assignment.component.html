@@ -1,15 +1,16 @@
 <div class="assingment-component">
   <h3 appTitleSizeDirective>Assign Student to Course</h3>
 
-  <div *ngIf="isLoading">
-    <!-- LOADER -->
+  <!-- LOADER -->
+  <div *ngIf="isLoading$ | async; else courseList">
     <div class="loading">
       <mat-spinner></mat-spinner>
     </div>
   </div>
 
-  <ng-container *ngIf="!isLoading">
-    <mat-accordion class="dropdown">
+  <!-- CONTENIDO PRINCIPAL -->
+  <ng-template #courseList>
+    <mat-accordion class="dropdown" *ngIf="courses$ | async as courses">
       <ng-container *ngFor="let course of courses">
         <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" class="dropdown__container">
           <mat-expansion-panel-header>
@@ -20,11 +21,11 @@
           </mat-expansion-panel-header>
           <div class="dropdown__container__content">
             <div>
-              <ng-container *ngIf="course.studentList && course.studentList.length > 0; else noStudents">
-                <ng-container *ngFor="let student of course.studentList;">
+              <ng-container *ngIf="course.studentsList && course.studentsList.length > 0; else noStudents">
+                <ng-container *ngFor="let student of course.studentsList;">
                   <mat-chip-row class="dropdown__container__content__chip">
                     {{ student.firstName }}
-                    <button matChipRemove aria-label="remove" (click)="openDialog('Course', 'Remove', course, student)">
+                    <button matChipRemove aria-label="remove" (click)="openDialog('Course', 'Remove', course, student)" *ngIf="role$ | async">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip-row>
@@ -41,5 +42,5 @@
         </mat-expansion-panel>
       </ng-container>
     </mat-accordion>
-  </ng-container>
+  </ng-template>
 </div>

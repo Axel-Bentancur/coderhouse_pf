@@ -11,4 +11,9 @@
     <mat-icon>assignment_ind</mat-icon>
     Assign Student to Course
   </button>
+  <!-- Mostrar el botón solo si el rol es admin -->
+  <button *ngIf="role$ | async" mat-fab extended class="menu-icon" aria-label="Users list" (click)="navigation('/dashboard/users')">
+    <mat-icon>people_alt</mat-icon>
+    Users List
+  </button>
 </div>

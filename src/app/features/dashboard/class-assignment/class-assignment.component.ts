@@ -1,9 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ICourse, IStudent } from '../../../core/models';
-import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { ClassActions } from './store/class.actions';
+import { selectClasses, selectIsLoading } from './store/class.selectors';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-class-assignment',
@@ -11,15 +15,23 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './class-assignment.component.scss'
 })
 export class ClassAssignmentComponent implements OnInit{
-  courses: ICourse[] | null = null;
-  isLoading = false;
+  role$: Observable<boolean>;
+  courses$: Observable<ICourse[]>
+  isLoading$: Observable<boolean>;
   panelOpenState = signal(false);
 
-  constructor(public dialog: MatDialog, private coursesService: CoursesService) {
+  constructor(
+    public dialog: MatDialog,
+    private store: Store,
+    private authService: AuthService
+  ) {
+    this.courses$ = this.store.select(selectClasses),
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.role$ = authService.getUserRole()
   }
 
   ngOnInit(): void {
-    this.loadCourse();
+    this.store.dispatch(ClassActions.loadClasses());
   }
 
   handleError(err: any): void {
@@ -40,57 +52,12 @@ export class ClassAssignmentComponent implements OnInit{
     }
   }
 
-  loadCourse(): void {
-    this.isLoading = true;
-    this.coursesService.getCourses().subscribe({
-      next: (course) => {
-        this.courses = course;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
-  }
-
   addStudent(courseId: string, studentId: string): void {
-    this.isLoading = true;
-    this.coursesService.addStudentToCourse(courseId, studentId).subscribe({
-      next: (course) => {
-        if (this.courses) {
-          const index = this.courses.findIndex(c => c.id === course.id);
-          if (index !== -1) {
-            this.courses[index] = course;
-          } else {
-            this.courses.push(course);
-          }
-        } else {
-          console.error('Courses array is null.');
-        }
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(ClassActions.updateClass({ courseId, studentId }))
   }
 
   removeStudent(courseId: string, studentId: string): void {
-    this.isLoading = true;
-    this.coursesService.deleteStudent(courseId, studentId).subscribe({
-      next: (updatedCourse) => {
-        if (this.courses) {
-          const index = this.courses.findIndex(course => course.id === updatedCourse.id);
-          if (index !== -1) {
-            this.courses[index] = updatedCourse;
-          }
-        }
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(ClassActions.deleteClass({ courseId, studentId }))
   }
 
   openDialog(modalType: string, action: string, element: ICourse | null,  student?: IStudent): void {

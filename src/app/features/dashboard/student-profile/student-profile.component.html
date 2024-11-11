@@ -30,10 +30,14 @@
 
           <mat-card-content>
             <h6>Enrolled Courses:</h6>
-            <ul *ngFor="let course of student?.courses">
-              <li>{{ course.courseName }}</li>
+            <div *ngIf="coursesList.length === 0">
+              <p>No courses found for this student.</p>
+            </div>
+            <ul *ngIf="coursesList.length > 0">
+              <li *ngFor="let course of coursesList">{{ course.courseName }}</li>
             </ul>
           </mat-card-content>
+
         </div>
       </div>
     </mat-card>

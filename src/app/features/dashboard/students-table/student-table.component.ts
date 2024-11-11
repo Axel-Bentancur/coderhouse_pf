@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { IStudent } from '../../../core/models';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
-import { StudentsService } from '../../../core/services/students.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { StudentActions } from './store/student.actions';
+import { Observable } from 'rxjs';
+import { selectIsLoading, selectStudents } from './store/student.selectors';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-student-table',
@@ -11,15 +15,29 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./student-table.component.scss'],
 })
 export class StudentTableComponent implements OnInit{
-  students: IStudent[] = []
-  isLoading = false;
-  displayedColumns: string[] = ['id', 'firstName', 'address', 'phone', 'email', 'view', 'edit', 'delete'];
+  role$: Observable<boolean>;
+  students$: Observable<IStudent[]>
+  isLoading$: Observable<boolean>;
+  displayedColumns: string[] = ['id', 'firstName', 'address', 'phone', 'email', 'view'];
 
-  constructor(public dialog: MatDialog, private StudentsService: StudentsService) {
+  constructor(
+    public dialog: MatDialog,
+    private store: Store,
+    private authService: AuthService
+  ) {
+    this.students$ = this.store.select(selectStudents),
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.role$ = authService.getUserRole()
   }
 
   ngOnInit(): void {
-    this.loadUsers()
+    this.store.dispatch(StudentActions.loadStudents());
+
+    this.role$.subscribe(role => {
+      if (role) {
+        this.displayedColumns.push('edit', 'delete');
+      }
+    });
   }
 
   handleError(err: any): void {
@@ -40,57 +58,17 @@ export class StudentTableComponent implements OnInit{
     }
   }
 
-  loadUsers(): void {
-    this.isLoading = true;
-    this.StudentsService.getStudents().subscribe({
-      next: (users) => {
-        this.students = users;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
-  }
-
   createUser(student: IStudent): void {
-    this.isLoading = true;
-    this.StudentsService.createStudent(student).subscribe({
-      next: (newStudent) => {
-        this.students.push(newStudent);
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(StudentActions.createStudent({ student }));
   }
 
 
   updateUsers(id: string, update: Partial<IStudent>): void {
-    this.isLoading = true;
-    this.StudentsService.updateStudents(id, update).subscribe({
-      next: (users) => {
-        this.students = users;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(StudentActions.updateStudent({ id, update }));
   }
 
   deleteUsers(id: string): void {
-    this.isLoading = true;
-    this.StudentsService.deleteStudent(id).subscribe({
-      next: (users) => {
-        this.students = users;
-      },
-      error: (err) => this.handleError(err),
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(StudentActions.deleteStudent({ id }));
   }
 
   openDialog(modalType: string, action: string, element: IStudent | null): void {
